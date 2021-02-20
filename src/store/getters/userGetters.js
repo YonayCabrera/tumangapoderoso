@@ -1,4 +1,4 @@
-import {GET_USER} from 'getterTypes'
+import {GET_USER} from './getterTypes'
 import { deepClone } from '../helper/cloneHelper'
 
 export default {

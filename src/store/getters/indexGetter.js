@@ -1,5 +1,7 @@
 import UserGetter from './userGetters'
+import LoadingGetter from './loadingGetters'
 
 export default {
-    ...UserGetter
+    ...UserGetter,
+    ...LoadingGetter
 }

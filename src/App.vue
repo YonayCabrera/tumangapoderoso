@@ -36,7 +36,12 @@
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
-
+    <v-progress-circular
+        indeterminate
+        color="primary"
+        id="spinner"
+        v-if="isLoading"
+    ></v-progress-circular>
     <v-main>
       <HelloWorld/>
     </v-main>
@@ -45,17 +50,43 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapActions, mapGetters } from 'vuex';
 import HelloWorld from './components/HelloWorld.vue';
+import { FETCH_LOADING, FETCH_USER } from './store/actions/actionTypes';
+import { GET_LOADING } from './store/getters/getterTypes';
 
 export default Vue.extend({
   name: 'App',
-
   components: {
     HelloWorld,
   },
-
+  computed: {
+    ...mapGetters({
+      isLoading: GET_LOADING
+    })
+  },
   data: () => ({
     //
   }),
+  methods: {
+    ...mapActions({
+      fetchLoading: FETCH_LOADING,
+      fetchUser: FETCH_USER
+    })
+  },
+  created() {
+    const user = {name:'yonay'}
+    this.fetchUser(user)
+    //this.fetchLoading(true)
+  }
 });
 </script>
+
+<style scoped>
+#spinner {
+  z-index: 3;
+  position: relative;
+  top: 50%;
+  left: 50%;
+}
+</style>
